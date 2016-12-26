@@ -20,7 +20,7 @@ IUSE="debug doc ipv6 static-libs samples"
 DOCS="NEWS README.md ChangeLog"
 
 PATCHES=(
-	"${FILESDIR}"/${PN}-1.6.19-docs-install.patch
+	"${FILESDIR}"/${PN}-1.8.0-docs-install.patch
 )
 
 src_prepare() {
