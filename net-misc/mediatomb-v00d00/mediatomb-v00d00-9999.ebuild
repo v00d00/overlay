@@ -20,12 +20,13 @@ EGIT_REPO_URI="https://github.com/v00d00/${MY_PN}.git"
 IUSE="curl debug +exif +ffmpeg +javascript lastfm libav +magic mysql +taglib"
 
 DEPEND="
-	!net-misc/mediatomb
-	mysql? ( virtual/mysql )
-	dev-libs/expat
-	javascript? ( >=dev-lang/spidermonkey-1.8.5:0 )
-	taglib? ( media-libs/taglib )
+	!!net-misc/mediatomb
+	net-libs/libupnp:1.8
 	>=dev-db/sqlite-3
+	dev-libs/expat
+	mysql? ( virtual/mysql )
+	javascript? ( >=dev-lang/spidermonkey-1.8.5:0 )
+	taglib? ( >=media-libs/taglib-1.11 )
 	lastfm? ( >=media-libs/lastfmlib-0.4 )
 	exif? ( media-libs/libexif )
 	ffmpeg? (
@@ -36,7 +37,7 @@ DEPEND="
 	magic? ( sys-apps/file )
 	sys-apps/util-linux
 	sys-libs/zlib
-	virtual/libiconv
+	virtual/libiconvi
 "
 RDEPEND="${DEPEND}"
 
