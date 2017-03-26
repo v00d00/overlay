@@ -6,21 +6,19 @@ EAPI=6
 
 inherit cmake-utils eutils git-r3 linux-info systemd user
 
-MY_PN="mediatomb"
-
-DESCRIPTION="MediaTomb-v00d00 is an updated fork of MediaTomb"
-HOMEPAGE="https://github.com/v00d00/mediatomb"
+DESCRIPTION="Gerbera Media Server"
+HOMEPAGE="https://github.com/v00d00/gerbera"
 
 LICENSE="GPL-2"
 SLOT="0"
 KEYWORDS="~amd64 ~arm ~x86"
 
-EGIT_REPO_URI="https://github.com/v00d00/${MY_PN}.git"
+EGIT_REPO_URI="https://github.com/v00d00/${PN}.git"
 
 IUSE="curl debug +exif +ffmpeg +javascript lastfm libav +magic mysql +taglib"
 
 DEPEND="
-	!!net-misc/mediatomb
+	!!net-misc/gerbera
 	net-libs/libupnp:1.8
 	>=dev-db/sqlite-3
 	dev-libs/expat
@@ -46,8 +44,8 @@ CONFIG_CHECK="~INOTIFY_USER"
 pkg_setup() {
 	linux-info_pkg_setup
 
-	enewgroup ${MY_PN}
-	enewuser ${MY_PN} -1 -1 /dev/null ${MY_PN}
+	enewgroup ${PN}
+	enewuser ${PN} -1 -1 /dev/null ${PN}
 }
 
 src_configure() {
@@ -67,36 +65,36 @@ src_configure() {
 }
 
 src_install() {
-	default
+	cmake-utils_src_install	
 
-	systemd_dounit "${S}/scripts/systemd/${MY_PN}.service"
+	systemd_dounit "${S}/scripts/systemd/${PN}.service"
 	use mysql && systemd_dounit "${S}/scripts/systemd/${PN}-mysql.service"
 
-	newinitd "${FILESDIR}/${MY_PN}-0.12.1.initd" "${MY_PN}"
-	use mysql || sed -i -e "/use mysql/d" "${ED}/etc/init.d/${MY_PN}"
-	newconfd "${FILESDIR}/${MY_PN}-0.12.0.confd" "${MY_PN}"
+	newinitd "${FILESDIR}/${PN}-0.12.1.initd" "${PN}"
+	use mysql || sed -i -e "/use mysql/d" "${ED}/etc/init.d/${PN}"
+	newconfd "${FILESDIR}/${PN}-0.12.0.confd" "${PN}"
 
-	insinto /etc/${MY_PN}
-	newins "${FILESDIR}/${MY_PN}-0.12.0.config" config.xml
-	fperms 0600 /etc/${MY_PN}/config.xml
-	fowners mediatomb:mediatomb /etc/${MY_PN}/config.xml
+	insinto /etc/${PN}
+	newins "${FILESDIR}/${PN}-0.12.0.config" config.xml
+	fperms 0600 /etc/${PN}/config.xml
+	fowners gerbera:gerbera /etc/${PN}/config.xml
 
-	keepdir /var/lib/${MY_PN}
-	fowners ${MY_PN}:${MY_PN} /var/lib/${MY_PN}
+	keepdir /var/lib/${PN}
+	fowners ${PN}:${PN} /var/lib/${PN}
 }
 
 pkg_postinst() {
 	if use mysql ; then
-		elog "MediaTomb has been built with MySQL support and needs"
+		elog "Gerbera has been built with MySQL support and needs"
 		elog "to be configured before being started."
-		elog "For more information, please consult the MediaTomb"
-		elog "documentation: http://mediatomb.cc/pages/documentation"
+		elog "For more information, please consult the gerbera"
+		elog "documentation: http://gerbera.cc/pages/documentation"
 		elog
 	fi
 
 	elog "To configure ${PN} edit:"
-	elog "/etc/mediatomb/config.xml"
+	elog "/etc/gerbera/config.xml"
 	elog
-	elog "The MediaTomb web interface can be reached at (after the service is started):"
+	elog "The gerbera web interface can be reached at (after the service is started):"
 	elog "http://localhost:49152/"
 }
