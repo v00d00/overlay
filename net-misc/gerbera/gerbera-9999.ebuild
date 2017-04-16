@@ -35,7 +35,7 @@ DEPEND="
 	magic? ( sys-apps/file )
 	sys-apps/util-linux
 	sys-libs/zlib
-	virtual/libiconvi
+	virtual/libiconv
 "
 RDEPEND="${DEPEND}"
 
