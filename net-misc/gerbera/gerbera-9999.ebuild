@@ -18,7 +18,7 @@ EGIT_REPO_URI="https://github.com/v00d00/${PN}.git"
 IUSE="curl debug +exif +ffmpeg +javascript lastfm libav +magic mysql +taglib"
 
 DEPEND="
-	!!net-misc/gerbera
+	!!net-misc/mediatomb
 	net-libs/libupnp:1.8
 	>=dev-db/sqlite-3
 	dev-libs/expat
