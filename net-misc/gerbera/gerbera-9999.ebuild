@@ -19,7 +19,7 @@ IUSE="curl debug +exif +ffmpeg +javascript lastfm libav +magic mysql +taglib"
 
 DEPEND="
 	!!net-misc/mediatomb
-	net-libs/libupnp:1.8
+	net-libs/libupnp:1.8[reuseaddr]
 	>=dev-db/sqlite-3
 	dev-libs/expat
 	mysql? ( virtual/mysql )
