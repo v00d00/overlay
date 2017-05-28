@@ -23,7 +23,7 @@ DEPEND="
 	>=dev-db/sqlite-3
 	dev-libs/expat
 	mysql? ( virtual/mysql )
-	javascript? ( >=dev-lang/spidermonkey-1.8.5:0 )
+	javascript? ( dev-lang/duktape )
 	taglib? ( >=media-libs/taglib-1.11 )
 	lastfm? ( >=media-libs/lastfmlib-0.4 )
 	exif? ( media-libs/libexif )
